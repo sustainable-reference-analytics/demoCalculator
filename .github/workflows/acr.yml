@@ -23,7 +23,7 @@ jobs:
         docker images
     - name: Build the Docker image
       run: |
-        ls
+        echo ls
         docker build -t $IMAGE_NAME .
     - name: Tag the image
       run: docker tag $IMAGE_NAME ${{secrets.AZ_REGISTRY}}/$IMAGE_NAME:$IMAGE_TAG
