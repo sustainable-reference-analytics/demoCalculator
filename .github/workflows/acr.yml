@@ -11,8 +11,19 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    env:
+      IMAGE_NAME: "demo-calculator"
+      IMAGE_TAG: "dev-v1"
 
     steps:
-    - uses: actions/checkout@v3
+    - name: login to acr
+      run: 
+        docker login ${{secrets.AZ_REGISTRY}} -u ${{secrets.AZ_SERVICE_ID}} -p ${{secrets.AZ_SERVICE_PASS}} 
+        echo "Login Successful"
+        docker images
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      run: docker build -t $IMAGE_NAME .
+    - name: Tag the image
+      run: docker tag $IMAGE_NAME ${{secrets.AZ_REGISTRY}}/$IMAGE_NAME:$IMAGE_TAG
+    - name : Push to acr
+      run : docker push ${{secrets.AZ_REGISTRY}}/$IMAGE_NAME:$IMAGE_TAG
