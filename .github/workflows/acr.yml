@@ -17,7 +17,7 @@ jobs:
 
     steps:
     - name: login to acr
-      run: 
+      run: |
         docker login ${{secrets.AZ_REGISTRY}} -u ${{secrets.AZ_SERVICE_ID}} -p ${{secrets.AZ_SERVICE_PASS}} 
         echo "Login Successful"
         docker images
