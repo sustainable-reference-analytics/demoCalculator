@@ -25,9 +25,9 @@ jobs:
       run:  docker images
     
     - name: Build the Docker image
-      run: docker build -t $IMAGE_NAME .
+      run: docker build -t $IMAGE_NAME:$IMAGE_TAG . --file Dockerfile
       
-    - name: Tag the image
-      run: docker tag $IMAGE_NAME ${{secrets.AZ_REGISTRY}}/$IMAGE_NAME:$IMAGE_TAG
+#     - name: Tag the image
+#       run: docker tag $IMAGE_NAME ${{secrets.AZ_REGISTRY}}/$IMAGE_NAME:$IMAGE_TAG
     - name : Push to acr
-      run : docker push ${{secrets.AZ_REGISTRY}}/$IMAGE_NAME:$IMAGE_TAG
+      run : docker push $IMAGE:$IMAGE_TAG
