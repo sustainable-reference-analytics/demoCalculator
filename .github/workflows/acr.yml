@@ -22,7 +22,7 @@ jobs:
         docker login ${{secrets.AZ_REGISTRY}} -u ${{secrets.AZ_SERVICE_ID}} -p ${{secrets.AZ_SERVICE_PASS}} 
         echo "Login Successful"
         docker images
-        docker build -t $IMAGE_NAME:$IMAGE_TAG .
+        docker build -t $IMAGE_NAME:$IMAGE_TAG ..
       
 #     - name: Tag the image
 #       run: docker tag $IMAGE_NAME ${{secrets.AZ_REGISTRY}}/$IMAGE_NAME:$IMAGE_TAG
