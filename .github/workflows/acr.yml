@@ -17,6 +17,7 @@ jobs:
 
     steps:
     - name: login to acr and build image
+      working-directory: .
       run: |
         docker images
         docker build -t $IMAGE_NAME:$IMAGE_TAG .
