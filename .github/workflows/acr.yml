@@ -17,8 +17,8 @@ jobs:
 
     steps:
     - name: login to acr and build image
-      working-directory: ..
       run: |
+        ls -la
         docker images
         docker build -t $IMAGE_NAME:$IMAGE_TAG .
         docker login ${{secrets.AZ_REGISTRY}} -u ${{secrets.AZ_SERVICE_ID}} -p ${{secrets.AZ_SERVICE_PASS}} 
