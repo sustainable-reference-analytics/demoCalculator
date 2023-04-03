@@ -18,6 +18,8 @@ jobs:
     steps:
     - name: login to acr and build image
       run: |
+        cd ..
+        cd ..
         pwd
         ls -la
         docker images
