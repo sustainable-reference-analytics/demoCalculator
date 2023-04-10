@@ -18,7 +18,7 @@ exports.calculate = function(req, res) {
   };
 
   // Determine the 
-  //random comment1
+  //random comment2
 
   if (! req.query.operation) {
     throw new Error("Unspecified operation");
