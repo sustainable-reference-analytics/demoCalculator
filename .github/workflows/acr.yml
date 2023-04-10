@@ -2,7 +2,7 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "test" ]
   pull_request:
     branches: [ "master" ]
 
@@ -15,7 +15,13 @@ jobs:
       IMAGE_NAME: "demo-calculator"
       IMAGE_TAG: "dev-v1"
 
+    
+
     steps:
+
+    - uses: actions/checkout@v3
+      with:
+        ref: "test"
     - name: login to acr and build image
       run: |
         cd ..
