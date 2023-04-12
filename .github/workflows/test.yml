@@ -1,0 +1,38 @@
+name: Dev workflow
+
+on: 
+  push:
+    branches:
+      - "test"
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+    env:
+      IMAGE_NAME: "demo-calculator"
+      IMAGE_TAG: "dev-v1"
+
+    
+    steps:
+
+    - name: checkout 
+      uses: sustainable-reference-analytics/checkout@v3
+      with:
+        ref: test
+    - name: login to acr and build image
+      run: |
+        pwd
+        ls -la
+        docker images
+        docker build -t $IMAGE_NAME .
+        docker login ${{secrets.AZ_REGISTRY}} -u ${{secrets.AZ_SERVICE_ID}} -p ${{secrets.AZ_SERVICE_PASS}} 
+        echo "Login Successful"
+        docker images
+      
+    - name: Tag the image
+      run: docker tag $IMAGE_NAME ${{secrets.AZ_REGISTRY}}/$IMAGE_NAME:$IMAGE_TAG
+
+    - name : Push to acr
+      run : docker push ${{secrets.AZ_REGISTRY}}/$IMAGE_NAME:$IMAGE_TAG
