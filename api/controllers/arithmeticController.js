@@ -19,6 +19,7 @@ exports.calculate = function(req, res) {
 
   // Determine the 
   //random comment2
+  // test master push 
 
   if (! req.query.operation) {
     throw new Error("Unspecified operation");
