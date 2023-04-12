@@ -1,10 +1,9 @@
-name: Docker Image CI
+name: Master workflow
 
-on:
-  push:
-    branches: [ "test" ]
+on: 
   pull_request:
-    branches: [ "master" ]
+    branches:
+      - "master"
 
 jobs:
 
@@ -13,20 +12,17 @@ jobs:
     runs-on: ubuntu-latest
     env:
       IMAGE_NAME: "demo-calculator"
-      IMAGE_TAG: "dev-v1"
+      IMAGE_TAG: "prod-v1"
 
     
-
     steps:
 
     - name: checkout 
-      uses: actions/checkout@v3
+      uses: sustainable-reference-analytics/checkout@v3
       with:
-        ref: "test"
+        ref: test
     - name: login to acr and build image
       run: |
-        cd ..
-        cd ..
         pwd
         ls -la
         docker images
@@ -35,7 +31,8 @@ jobs:
         echo "Login Successful"
         docker images
       
-#     - name: Tag the image
-#       run: docker tag $IMAGE_NAME ${{secrets.AZ_REGISTRY}}/$IMAGE_NAME:$IMAGE_TAG
+    - name: Tag the image
+      run: docker tag $IMAGE_NAME ${{secrets.AZ_REGISTRY}}/$IMAGE_NAME:$IMAGE_TAG
+
     - name : Push to acr
-      run : docker push $IMAGE:$IMAGE_TAG
+      run : docker push ${{secrets.AZ_REGISTRY}}/$IMAGE_NAME:$IMAGE_TAG
