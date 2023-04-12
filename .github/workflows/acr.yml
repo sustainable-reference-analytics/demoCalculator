@@ -12,7 +12,6 @@ jobs:
       IMAGE_TAG: "dev-v1"
 
     
-
     steps:
 
     - name: checkout 
