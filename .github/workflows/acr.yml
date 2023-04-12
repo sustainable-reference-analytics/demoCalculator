@@ -1,6 +1,9 @@
-name: Docker Image CI
+name: Dev workflow
 
-on: [push]
+on: 
+  push:
+    branches:
+      - "test"
 
 jobs:
 
@@ -28,7 +31,8 @@ jobs:
         echo "Login Successful"
         docker images
       
-#     - name: Tag the image
-#       run: docker tag $IMAGE_NAME ${{secrets.AZ_REGISTRY}}/$IMAGE_NAME:$IMAGE_TAG
+    - name: Tag the image
+      run: docker tag $IMAGE_NAME ${{secrets.AZ_REGISTRY}}/$IMAGE_NAME:$IMAGE_TAG
+
     - name : Push to acr
-      run : docker push $IMAGE:$IMAGE_TAG
+      run : docker push ${{secrets.AZ_REGISTRY}}/$IMAGE_NAME:$IMAGE_TAG
