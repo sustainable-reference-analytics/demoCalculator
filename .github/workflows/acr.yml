@@ -16,7 +16,7 @@ jobs:
     steps:
 
     - name: checkout 
-      uses: actions/checkout@v1
+      uses: checkout@v3
       with:
         ref: test
     - name: login to acr and build image
