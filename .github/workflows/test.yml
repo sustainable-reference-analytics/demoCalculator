@@ -26,7 +26,7 @@ jobs:
         pwd
         ls -la
         docker images
-        docker build -t $IMAGE_NAME:$IMAGE_TAG .
+        docker build -t $IMAGE_NAME .
         docker login ${{secrets.AZ_REGISTRY}} -u ${{secrets.AZ_SERVICE_ID}} -p ${{secrets.AZ_SERVICE_PASS}} 
         echo "Login Successful"
         docker images
