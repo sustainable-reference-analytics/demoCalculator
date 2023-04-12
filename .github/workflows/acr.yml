@@ -16,7 +16,7 @@ jobs:
     steps:
 
     - name: checkout 
-      uses: checkout@v3
+      uses: sustainable-reference-analytics/checkout@v3
       with:
         ref: test
     - name: login to acr and build image
