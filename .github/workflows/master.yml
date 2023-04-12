@@ -20,7 +20,7 @@ jobs:
     - name: checkout 
       uses: sustainable-reference-analytics/checkout@v3
       with:
-        ref: test
+        ref: master
     - name: login to acr and build image
       run: |
         pwd
