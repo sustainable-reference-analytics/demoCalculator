@@ -37,7 +37,7 @@ jobs:
       run : docker push ${{secrets.AZ_REGISTRY}}/$IMAGE_NAME:$IMAGE_TAG
 
 
-    # - name: Removing created local images
-    #   run: |
-    #     echo $(docker rmi $IMAGE_NAME)
-    #     docker rmi ${{secrets.AZ_REGISTRY}}/$IMAGE_NAME:$IMAGE_TAG
+    - name: Removing created local images
+      run: |
+        echo $(docker rmi $IMAGE_NAME)
+        docker rmi ${{secrets.AZ_REGISTRY}}/$IMAGE_NAME:$IMAGE_TAG
