@@ -21,11 +21,18 @@ jobs:
       uses: sustainable-reference-analytics/checkout@v3
       with:
         ref: test
+
     - name: login to acr and build image
       run: |
         pwd
         ls -la
         docker images
+        if [[ docker image inspect $IMAGE_NAME ]]; then
+          docker rmi $IMAGE_NAME
+        fi
+        if [[ docker image inspect ${{secrets.AZ_REGISTRY}}/$IMAGE_NAME:$IMAGE_TAG ]]; then
+          docker rmi ${{secrets.AZ_REGISTRY}}/$IMAGE_NAME:$IMAGE_TAG
+        fi
         docker build -t $IMAGE_NAME .
         docker login ${{secrets.AZ_REGISTRY}} -u ${{secrets.AZ_SERVICE_ID}} -p ${{secrets.AZ_SERVICE_PASS}} 
         echo "Login Successful"
