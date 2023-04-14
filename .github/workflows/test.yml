@@ -25,6 +25,7 @@ jobs:
     - name: login to acr and build image
       run: |
         docker build -t $IMAGE_NAME .
+        pwd
         docker login ${{secrets.AZ_REGISTRY}} -u ${{secrets.AZ_SERVICE_ID}} -p ${{secrets.AZ_SERVICE_PASS}} 
         echo "Login Successful"
       
